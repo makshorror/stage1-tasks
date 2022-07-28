@@ -19,12 +19,8 @@ window.onload = function () {
         if (minutes < 10) minutes = "0" + minutes;
         if (seconds < 10) seconds = "0" + seconds;
 
-        let full_date =  days[day] + ", "+ dates + " " + months[month];
-
-        let clock = hours + ":" + minutes + ":" + seconds;
-
-        document.getElementById("time").innerHTML = clock;
-        document.getElementById("date").innerHTML = full_date;
+        document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+        document.getElementById("date").innerHTML = days[day] + ", "+ dates + " " + months[month];
         },1000);
 };
 
