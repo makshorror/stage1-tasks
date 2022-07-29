@@ -1,4 +1,28 @@
-// My API = 8ef7d1eab4a8990e718ef7a13bb2682b;
+// //Name
+let cities = document.querySelector(".city");
+let quot = document.getElementById("quote");
+let names = document.querySelector(".name");
+names.addEventListener("input", function (){
+    setLocalStorage("name", names.value);
+})
+
+cities.addEventListener("input", function (){
+    setLocalStorage("city", cities.value);
+})
+
+
+if (names.value !== getLocalStorage("name")) names.value = getLocalStorage("name");
+if (cities.value !== getLocalStorage("city")) cities.value = getLocalStorage("city");
+
+// LocalStorage //
+function setLocalStorage(name,input) {
+    localStorage.setItem(name, input);
+}
+//
+function getLocalStorage(name) {
+    return localStorage.getItem(name);
+}
+//
 
 //Time and Date
 
@@ -54,12 +78,14 @@ fetch (hint)
     .then (data => hints = data);
 
 
+
 function randomQuote() {
     let quotation = document.getElementById("quote");
     let source = document.getElementById("author");
     let random = hints[Math.floor(Math.random() * hints.length)];
     quotation.innerText = `“${random.quote}.”`;
     source.innerText = random.source;
+
 }
 
 
