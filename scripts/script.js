@@ -89,7 +89,7 @@ function init() {
         })
         .then(data => {
             let imgId = data['weather']['0']['icon'];
-            iconBlock.innerHTML = `<img src='https://openweathermap.org/img/wn/${imgId}.png'>`;
+            iconBlock.innerHTML = `<img src='https://openweathermap.org/img/wn/${imgId}.png' alt="weather">`;
             tempBlock.textContent = `${temperature()}°C`;
             descriptionBlock.textContent = `${data['weather']['0']['description']}`;
             windBlock.textContent = `Wind speed: ${windSpeed()} m/s`;
@@ -116,7 +116,6 @@ init()
 
 
 //Player
-
 const playBtn = document.querySelector("#playPlay");
 const nextPlayBtn = document.querySelector("#nextPlay");
 const prevPlayBtn = document.querySelector("#revPlay");
