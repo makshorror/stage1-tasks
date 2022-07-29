@@ -1,18 +1,17 @@
 // //Name
-let cities = document.querySelector(".city");
-let quot = document.getElementById("quote");
 let names = document.querySelector(".name");
+let cities = document.querySelector(".city")
+
+// cities.addEventListener("input", function (){
+//     setLocalStorage("city", cities.value);
+// })
+
 names.addEventListener("input", function (){
     setLocalStorage("name", names.value);
 })
 
-cities.addEventListener("input", function (){
-    setLocalStorage("city", cities.value);
-})
-
-
 if (names.value !== getLocalStorage("name")) names.value = getLocalStorage("name");
-if (cities.value !== getLocalStorage("city")) cities.value = getLocalStorage("city");
+// if (cities.value !== getLocalStorage("city")) cities.value = getLocalStorage("city");
 
 // LocalStorage //
 function setLocalStorage(name,input) {
@@ -90,6 +89,10 @@ function randomQuote() {
 
 
 //Weather
+
+
+
+
 let city = "Minsk"
 let searchInp = document.querySelector('#city')
 document.addEventListener('keydown', (e) => {
@@ -100,6 +103,8 @@ document.addEventListener('keydown', (e) => {
         init()
     }
 })
+
+
 
 let tempBlock = document.querySelector('#temp');
 let descriptionBlock = document.querySelector('#weather-description');
@@ -114,13 +119,13 @@ function init() {
             return resp.json()
         })
         .then(data => {
+
             let imgId = data['weather']['0']['icon'];
             iconBlock.innerHTML = `<img src='https://openweathermap.org/img/wn/${imgId}.png' alt="weather">`;
             tempBlock.textContent = `${temperature()}°C`;
             descriptionBlock.textContent = `${data['weather']['0']['description']}`;
             windBlock.textContent = `Wind speed: ${windSpeed()} m/s`;
             humidityBlock.textContent = `Humidity: ${data['main']['humidity']}%`
-
             function windSpeed(){
                 let speed = data['wind']['speed'];
                 let wS = Math.floor(speed);
@@ -138,6 +143,7 @@ function init() {
             init()
         })
 }
+
 init()
 
 
