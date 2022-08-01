@@ -1,12 +1,4 @@
-// LocalStorage //
-function setLocalStorage(name,input) {
-    localStorage.setItem(name, input);
-}
-function getLocalStorage(name) {
-    return localStorage.getItem(name);
-}
 
-//Name
 let names = document.querySelector(".name");
 
 names.addEventListener("input", function (){
@@ -14,6 +6,18 @@ names.addEventListener("input", function (){
 })
 
 if (names.value !== getLocalStorage("name")) names.value = getLocalStorage("name");
+
+
+
+
+
+// LocalStorage //
+function setLocalStorage(name,input) {
+    localStorage.setItem(name, input);
+}
+function getLocalStorage(name) {
+    return localStorage.getItem(name);
+}
 
 
 

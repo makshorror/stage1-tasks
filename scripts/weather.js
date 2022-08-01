@@ -1,13 +1,27 @@
-let city = "Minsk"
-let searchInp = document.querySelector('#city')
+let searchInp = document.querySelector('.city');
+console.log(searchInp.value)
+let city = localStorage.getItem("city");
+if (localStorage.getItem("city") === null) {
+    localStorage.setItem("city", "Minsk")
+    searchInp.value = "Minsk"
+    init()
+}
+if (localStorage.getItem("city") !== "") {
+    searchInp.value = localStorage.getItem("city");
+} else {
+    searchInp.value = localStorage.getItem("city");
+}
+
 document.addEventListener('keydown', (e) => {
     if(e.key === 'Enter') {
         let value = searchInp.value;
         if(!value) return false;
         city = value;
+        localStorage.setItem("city", searchInp.value)
         init()
     }
 })
+
 
 
 let tempBlock = document.querySelector('#temp');
@@ -42,11 +56,11 @@ function init() {
             }
         })
         .catch(() => {
-            alert('This city not found')
-            city = 'Minsk';
-            init()
+            // alert('This city not found')
+            // city = 'Minsk';
+            // searchInp.value = 'Minsk';
+            // init()
         })
 }
 
 init()
-
