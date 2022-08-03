@@ -4,27 +4,26 @@ const prevPlayBtn = document.querySelector("#revPlay");
 
 const playList =  [
     {
-    title: 'Aqua Caelestis',
-    src: '../assets/sound/Aqua Caelestis.mp3',
-    duration: '00:40'
+        title: 'Aqua Caelestis',
+        src: '../assets/sounds/Aqua Caelestis.mp3',
+        duration: '00:40'
     },
     {
         title: 'River Flows In You',
-        src: '../assets/sound/River Flows In You.mp3',
+        src: '../assets/sounds/River Flows In You.mp3',
         duration: '01:37'
     },
     {
         title: 'Ennio Morricone',
-        src: '../assets/sound/Ennio Morricone.mp3',
+        src: '../assets/sounds/Ennio Morricone.mp3',
         duration: '01:37'
     },
     {
         title: 'Summer Wind',
-        src: '../assets/sound/Summer Wind.mp3',
+        src: '../assets/sounds/Summer Wind.mp3',
         duration: '01:51'
     },
 ];
-
 let trackProps = {
     onAir: false,
     position: 0,
@@ -34,3 +33,16 @@ let trackProps = {
     muted: false,
     currentTime: 0
 };
+
+playBtn.addEventListener("click", function (){
+    let audio = new Audio();
+    audio.src = playList[0].src;
+    if (audio.paused) {
+        audio.play();
+        playBtn.classList.add("pause")
+    } else {
+        audio.pause();
+        playBtn.classList.remove("pause")
+    }
+
+})
