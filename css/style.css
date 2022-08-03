@@ -35,7 +35,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 120px;
+  width: 248px;
   margin-bottom: 28px;
 }
 
@@ -117,6 +117,46 @@ body {
 .play-next {
   background-image: url("../assets/svg/play-next.svg");
 }
+
+.play-mute {
+  background-image: url("../assets/svg/mute.svg");
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+.play-minvolume {
+  background-image: url("../assets/svg/low_volume.svg ");
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+.play-mediumvolume {
+  background-image: url("../assets/svg/medium_volume.svg ");
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+.play-maxvolume {
+  background-image: url("../assets/svg/full_volume.svg ");
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+.volumeRange {
+  -webkit-filter: invert(100%);
+  filter: invert(70%);
+  /*position: absolute;*/
+  width: 80px;
+  top: 50px;
+  left: 150px;
+}
+
+/*#mute + #volumeRange {*/
+/*  opacity: 0;*/
+/*}*/
+/*#mute:hover + #volumeRange {*/
+/*  opacity: 1;*/
+/*  transition: .3s;*/
+/*}*/
 
 .weather {
   display: flex;
