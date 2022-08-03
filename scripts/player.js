@@ -1,8 +1,12 @@
 const playBtn = document.querySelector("#playPlay");
 const nextPlayBtn = document.querySelector("#nextPlay");
-const prevPlayBtn = document.querySelector("#revPlay");
+const prevPlayBtn = document.querySelector("#prevPlay");
 let playItem = document.querySelector(".play-item")
-
+const track1 = document.querySelector("#track1");
+const track2 = document.querySelector("#track2");
+const track3 = document.querySelector("#track3");
+const track4 = document.querySelector("#track4");
+let audio = new Audio();
 const playList =  [
     {
         title: 'Aqua Caelestis',
@@ -34,18 +38,52 @@ let trackProps = {
     muted: false,
     currentTime: 0
 };
+//Audio src
+audio.src = playList[trackProps.position].src;
 
-let audio = new Audio();
-audio.src = playList[0].src;
-playBtn.addEventListener("click", () => {
-    if (audio.paused) {
+
+
+//Play and Pause
+playBtn.addEventListener("click", playPause)
+function playPause() {
+    if (trackProps.onAir === false) {
         audio.play();
+        trackProps.onAir = true;
         playBtn.classList.add("pause")
         playItem.classList.add("item-active")
     } else {
         audio.pause();
+        trackProps.onAir = false;
         playBtn.classList.remove("pause")
-        playItem.classList.remove("item-active")
     }
+}
 
+//Next Button
+nextPlayBtn.addEventListener('click', () => {
+    if (trackProps.position < 3) {
+        trackProps.position = trackProps.position + 1;
+        audio.src = playList[trackProps.position].src;
+        audio.play();
+        playBtn.classList.add("pause")
+    } else {
+        trackProps.position = 0;
+        audio.src = playList[trackProps.position].src;
+        audio.play();
+    }
 })
+
+//Prev Button
+prevPlayBtn.addEventListener('click', () => {
+    if (trackProps.position === 0) {
+        trackProps.position = 3;
+        audio.src = playList[trackProps.position].src;
+        audio.play();
+    } else {
+        trackProps.position = trackProps.position - 1;
+        audio.src = playList[trackProps.position].src;
+        audio.play();
+        playBtn.classList.add("pause")
+    }
+})
+
+
