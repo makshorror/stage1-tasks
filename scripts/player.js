@@ -1,6 +1,7 @@
 const playBtn = document.querySelector("#playPlay");
 const nextPlayBtn = document.querySelector("#nextPlay");
 const prevPlayBtn = document.querySelector("#revPlay");
+let playItem = document.querySelector(".play-item")
 
 const playList =  [
     {
@@ -40,9 +41,11 @@ playBtn.addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
         playBtn.classList.add("pause")
+        playItem.classList.add("item-active")
     } else {
         audio.pause();
         playBtn.classList.remove("pause")
+        playItem.classList.remove("item-active")
     }
 
 })
