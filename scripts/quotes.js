@@ -21,5 +21,4 @@ function randomQuote() {
     localStorage.setItem("quote", `"${random.quote}."`)
     source.innerText = random.source;
     localStorage.setItem("source", random.source);
-    console.log(hints)
-};
+}
