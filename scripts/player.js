@@ -34,9 +34,9 @@ let trackProps = {
     currentTime: 0
 };
 
-playBtn.addEventListener("click", function (){
-    let audio = new Audio();
-    audio.src = playList[0].src;
+let audio = new Audio();
+audio.src = playList[0].src;
+playBtn.addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
         playBtn.classList.add("pause")
