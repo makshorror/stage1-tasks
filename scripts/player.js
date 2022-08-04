@@ -101,7 +101,7 @@ nextPlayBtn.addEventListener('click', () => {
         trackProps.position = 0;
         trackProps.onAir = true;
         audio.src = playList[trackProps.position].src;
-        audio.play();
+        trackProps.muted = true;
         playBtn.classList.add("pause")
     }
 })
@@ -211,5 +211,7 @@ timer = setInterval(progressBar.oninput = function () {
     progressBar.value = trackProps.currentTime;
 }, 1000)
 
-
+progressBar.oninput = function () {
+    audio.currentTime = progressBar.value
+}
 
