@@ -2,6 +2,7 @@ const playBtn = document.querySelector("#playPlay");
 const nextPlayBtn = document.querySelector("#nextPlay");
 const prevPlayBtn = document.querySelector("#prevPlay");
 const muteBtn = document.querySelector('#mute');
+const progressBar = document.querySelector('#timeTrack');
 const volumeRange = document.querySelector('#volumeRange');
 let playItem = document.querySelector(".play-item")
 const track1 = document.querySelector("#track1");
@@ -87,6 +88,7 @@ function playPause() {
     }
 }
 
+
 //Next Button
 nextPlayBtn.addEventListener('click', () => {
     if (trackProps.position < 3) {
@@ -103,6 +105,7 @@ nextPlayBtn.addEventListener('click', () => {
         playBtn.classList.add("pause")
     }
 })
+
 
 //Prev Button
 prevPlayBtn.addEventListener('click', () => {
@@ -121,24 +124,50 @@ prevPlayBtn.addEventListener('click', () => {
     }
 })
 
+
 //Mute Button
 muteBtn.addEventListener("click",() =>{
     if (trackProps.muted === false) {
-        trackProps.muted = true;
+        trackProps.muted = true
+        muteBtn.classList.remove("play-minvolume");
+        muteBtn.classList.remove("play-mediumvolume");
         muteBtn.classList.remove("play-maxvolume");
         muteBtn.classList.add("play-mute")
         volumeRange.value = 0;
         trackProps.volume = 0;
         audio.volume = 0;
     } else {
-        trackProps.muted = false;
-        muteBtn.classList.remove("play-mute")
-        muteBtn.classList.add("play-maxvolume");
-        trackProps.volume = 100;
-        volumeRange.value = 100;
-        audio.volume = 1;
+        if (trackProps.prevVolume > 0 && trackProps.prevVolume < 0.4) {
+            trackProps.muted = false
+            muteBtn.classList.remove("play-mute")
+            muteBtn.classList.remove("play-mediumvolume")
+            muteBtn.classList.remove("play-maxvolume")
+            muteBtn.classList.add("play-minvolume");
+            trackProps.volume = trackProps.prevVolume * 100;
+            volumeRange.value = trackProps.prevVolume * 100;
+            audio.volume = trackProps.prevVolume;
+        } else if (trackProps.prevVolume > 0.4 && trackProps.prevVolume < 0.8) {
+            trackProps.muted = false
+            muteBtn.classList.remove("play-mute")
+            muteBtn.classList.remove("play-minvolume")
+            muteBtn.classList.remove("play-maxvolume")
+            muteBtn.classList.add("play-mediumvolume");
+            trackProps.volume = trackProps.prevVolume * 100;
+            volumeRange.value = trackProps.prevVolume * 100;
+            audio.volume = trackProps.prevVolume;
+        } else {
+            trackProps.muted = false
+            muteBtn.classList.remove("play-mute")
+            muteBtn.classList.remove("play-minvolume")
+            muteBtn.classList.remove("play-mediumvolume")
+            muteBtn.classList.add("play-maxvolume");
+            trackProps.volume = trackProps.prevVolume * 100;
+            volumeRange.value = trackProps.prevVolume * 100;
+            audio.volume = trackProps.prevVolume;
+        }
     }
 })
+
 
 //Volume Control
 volumeRange.oninput = function(){
@@ -155,18 +184,32 @@ audio.volume = trackProps.volume;
         muteBtn.classList.remove("play-mute")
         muteBtn.classList.remove("play-mediumvolume")
         muteBtn.classList.remove("play-maxvolume")
+        trackProps.prevVolume = trackProps.volume;
         muteBtn.classList.add("play-minvolume");
     } else if (trackProps.volume > 0.4 && trackProps.volume < 0.8) {
         trackProps.muted = false
         muteBtn.classList.remove("play-mute")
         muteBtn.classList.remove("play-minvolume")
         muteBtn.classList.remove("play-maxvolume")
+        trackProps.prevVolume = trackProps.volume;
         muteBtn.classList.add("play-mediumvolume");
     } else {
         trackProps.muted = false
         muteBtn.classList.remove("play-mute")
         muteBtn.classList.remove("play-minvolume")
         muteBtn.classList.remove("play-mediumvolume")
+        trackProps.prevVolume = trackProps.volume;
         muteBtn.classList.add("play-maxvolume");
     }
 }
+
+
+//Progress Bar
+timer = setInterval(progressBar.oninput = function () {
+    progressBar.max = audio.duration;
+    trackProps.currentTime = audio.currentTime;
+    progressBar.value = trackProps.currentTime;
+}, 1000)
+
+
+

@@ -33,6 +33,6 @@ window.onload = function () {
             document.getElementById("date").innerHTML = days[day] + ", " + months[month] + " " + dates;
             document.getElementById("greeting").innerHTML = greeting;
         },
-        0);
+        1000);
 };
 

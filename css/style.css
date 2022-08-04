@@ -58,7 +58,6 @@ body {
 }
 
 .play-item::before {
-  content: "\2713";  
   position: absolute;
   left: 0;
   top: 2px;
@@ -66,6 +65,7 @@ body {
 }
 
 .item-active::before {
+  content: "▶";
   color: #C5B358;
 }
 
@@ -144,19 +144,14 @@ body {
 .volumeRange {
   -webkit-filter: invert(100%);
   filter: invert(70%);
-  /*position: absolute;*/
   width: 80px;
   top: 50px;
   left: 150px;
 }
 
-/*#mute + #volumeRange {*/
-/*  opacity: 0;*/
-/*}*/
-/*#mute:hover + #volumeRange {*/
-/*  opacity: 1;*/
-/*  transition: .3s;*/
-/*}*/
+.timeTrack {
+  width: 155px;
+}
 
 .weather {
   display: flex;
