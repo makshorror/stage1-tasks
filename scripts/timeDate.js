@@ -1,6 +1,9 @@
+//Init Date
 addDate();
 
+//Interval
 window.setInterval(addDate,1000);
+
 
 function addDate (){
     let date = new Date();
