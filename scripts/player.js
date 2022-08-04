@@ -212,6 +212,6 @@ timer = setInterval(progressBar.oninput = function () {
 }, 1000)
 
 progressBar.oninput = function () {
-    audio.currentTime = progressBar.value
+    audio.currentTime = progressBar.value;
 }
 
