@@ -101,6 +101,7 @@ nextPlayBtn.addEventListener('click', () => {
         trackProps.position = 0;
         trackProps.onAir = true;
         audio.src = playList[trackProps.position].src;
+        audio.play();
         trackProps.muted = true;
         playBtn.classList.add("pause")
     }
