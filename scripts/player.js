@@ -50,24 +50,36 @@ playItem[0].addEventListener('click', () => {
     trackProps.position = 0;
     audio.src = playList[trackProps.position].src
     trackProps.onAir = false;
+    playItem[1].classList.remove('item-active')
+    playItem[2].classList.remove('item-active')
+    playItem[3].classList.remove('item-active')
     playPause()
 })
 playItem[1].addEventListener('click', () => {
     trackProps.position = 1;
     audio.src = playList[trackProps.position].src
     trackProps.onAir = false;
+    playItem[0].classList.remove('item-active')
+    playItem[2].classList.remove('item-active')
+    playItem[3].classList.remove('item-active')
     playPause()
 })
 playItem[2].addEventListener('click', () => {
     trackProps.position = 2;
     audio.src = playList[trackProps.position].src
     trackProps.onAir = false;
+    playItem[0].classList.remove('item-active')
+    playItem[1].classList.remove('item-active')
+    playItem[3].classList.remove('item-active')
     playPause()
 })
 playItem[3].addEventListener('click', () => {
     trackProps.position = 3;
     audio.src = playList[trackProps.position].src
     trackProps.onAir = false;
+    playItem[0].classList.remove('item-active')
+    playItem[1].classList.remove('item-active')
+    playItem[2].classList.remove('item-active')
     playPause()
 })
 
