@@ -53,6 +53,9 @@ playItem[0].addEventListener('click', () => {
     playItem[1].classList.remove('item-active')
     playItem[2].classList.remove('item-active')
     playItem[3].classList.remove('item-active')
+    playItem[1].classList.remove('item-noactive')
+    playItem[2].classList.remove('item-noactive')
+    playItem[3].classList.remove('item-noactive')
     playPause()
 })
 playItem[1].addEventListener('click', () => {
@@ -62,6 +65,9 @@ playItem[1].addEventListener('click', () => {
     playItem[0].classList.remove('item-active')
     playItem[2].classList.remove('item-active')
     playItem[3].classList.remove('item-active')
+    playItem[0].classList.remove('item-noactive')
+    playItem[2].classList.remove('item-noactive')
+    playItem[3].classList.remove('item-noactive')
     playPause()
 })
 playItem[2].addEventListener('click', () => {
@@ -71,6 +77,9 @@ playItem[2].addEventListener('click', () => {
     playItem[0].classList.remove('item-active')
     playItem[1].classList.remove('item-active')
     playItem[3].classList.remove('item-active')
+    playItem[0].classList.remove('item-noactive')
+    playItem[1].classList.remove('item-noactive')
+    playItem[3].classList.remove('item-noactive')
     playPause()
 })
 playItem[3].addEventListener('click', () => {
@@ -80,6 +89,9 @@ playItem[3].addEventListener('click', () => {
     playItem[0].classList.remove('item-active')
     playItem[1].classList.remove('item-active')
     playItem[2].classList.remove('item-active')
+    playItem[0].classList.remove('item-noactive')
+    playItem[1].classList.remove('item-noactive')
+    playItem[2].classList.remove('item-noactive')
     playPause()
 })
 
