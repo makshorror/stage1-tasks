@@ -18,7 +18,5 @@ function randomQuote() {
     let source = document.getElementById("author");
     let random = hints[Math.floor(Math.random() * hints.length)];
     quotation.innerText = `"${random.quote}."`;
-    localStorage.setItem("quote", `"${random.quote}."`)
     source.innerText = random.source;
-    localStorage.setItem("source", random.source);
 }
