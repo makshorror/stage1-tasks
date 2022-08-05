@@ -69,6 +69,11 @@ body {
   color: #C5B358;
 }
 
+.item-noactive::before {
+  content: "❚❚";
+  color: #C5B358;
+}
+
 .player-icon,
 .slider-icon,
 .change-quote {

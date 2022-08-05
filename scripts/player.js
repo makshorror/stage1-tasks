@@ -2,19 +2,14 @@ const playBtn = document.querySelector("#playPlay");
 const nextPlayBtn = document.querySelector("#nextPlay");
 const prevPlayBtn = document.querySelector("#prevPlay");
 const muteBtn = document.querySelector('#mute');
-const progressBar = document.querySelector('#timeTrack');
 const volumeRange = document.querySelector('#volumeRange');
-let playItem = document.querySelector(".play-item")
-const track1 = document.querySelector("#track1");
-const track2 = document.querySelector("#track2");
-const track3 = document.querySelector("#track3");
-const track4 = document.querySelector("#track4");
+const playItem = document.querySelectorAll(".play-item");
 let audio = new Audio();
 const playList =  [
     {
         title: 'Aqua Caelestis',
         src: './assets/sounds/Aqua Caelestis.mp3',
-        duration: '00:40'
+        duration: '00:39'
     },
     {
         title: 'River Flows In You',
@@ -29,7 +24,7 @@ const playList =  [
     {
         title: 'Summer Wind',
         src: './assets/sounds/Summer Wind.mp3',
-        duration: '01:51'
+        duration: '01:50'
     },
 ];
 let trackProps = {
@@ -41,62 +36,78 @@ let trackProps = {
     muted: false,
     currentTime: 0
 };
-//Audio click
-track1.addEventListener("click",() => {
-    trackProps.position = 0;
-    trackProps.onAir = true;
-    audio.src = playList[trackProps.position].src;
-    audio.play();
-    playBtn.classList.add("pause");
-    trackProps.onAir = true;
-})
-track2.addEventListener("click",() => {
-    trackProps.position = 1;
-    trackProps.onAir = true;
-    audio.src = playList[trackProps.position].src;
-    audio.play();
-    playBtn.classList.add("pause")
-})
-track3.addEventListener("click",() => {
-    trackProps.position = 2;
-    trackProps.onAir = true;
-    audio.src = playList[trackProps.position].src;
-    audio.play();
-    playBtn.classList.add("pause")
-})
-track4.addEventListener("click",() => {
-    trackProps.position = 3;
-    trackProps.onAir = true;
-    audio.src = playList[trackProps.position].src;
-    audio.play();
-    playBtn.classList.add("pause")
-})
+audio.src = playList[trackProps.position].src;
+let track = document.createElement("input")
+track.type = "range";
+track.min = "0"
+track.max = "100"
+track.value = "0"
+track.className = "timeTrack";
 
+
+//Audio click
+playItem[0].addEventListener('click', () => {
+    trackProps.position = 0;
+    audio.src = playList[trackProps.position].src
+    trackProps.onAir = false;
+    playPause()
+})
+playItem[1].addEventListener('click', () => {
+    trackProps.position = 1;
+    audio.src = playList[trackProps.position].src
+    trackProps.onAir = false;
+    playPause()
+})
+playItem[2].addEventListener('click', () => {
+    trackProps.position = 2;
+    audio.src = playList[trackProps.position].src
+    trackProps.onAir = false;
+    playPause()
+})
+playItem[3].addEventListener('click', () => {
+    trackProps.position = 3;
+    audio.src = playList[trackProps.position].src
+    trackProps.onAir = false;
+    playPause()
+})
 
 //Play and Pause
-audio.src = playList[trackProps.position].src;
-playBtn.addEventListener("click", playPause)
 function playPause() {
+    console.log(Math.floor(audio.duration))
+    console.log(audio.currentTime)
     if (trackProps.onAir === false) {
         audio.play();
         trackProps.onAir = true;
         playBtn.classList.add("pause")
+        playItem[trackProps.position].classList.remove('item-noactive')
+        playItem[trackProps.position].classList.add('item-active')
+        playItem[trackProps.position].after(track)
     } else {
         audio.pause();
         trackProps.onAir = false;
         playBtn.classList.remove("pause")
+        playItem[trackProps.position].classList.remove('item-active')
+        playItem[trackProps.position].classList.add('item-noactive')
     }
 }
 
+playBtn.addEventListener("click", playPause)
+
 
 //Next Button
-nextPlayBtn.addEventListener('click', () => {
+function nextBtn() {
+
     if (trackProps.position < 3) {
         trackProps.onAir = true;
         trackProps.position = trackProps.position + 1;
         audio.src = playList[trackProps.position].src;
         audio.play();
         playBtn.classList.add("pause")
+        playItem[trackProps.position - 1].classList.remove('item-active')
+        playItem[trackProps.position - 1].classList.remove('item-noactive')
+        playItem[trackProps.position].classList.add('item-active')
+        playItem[trackProps.position].after(track)
+
     } else {
         trackProps.position = 0;
         trackProps.onAir = true;
@@ -104,30 +115,46 @@ nextPlayBtn.addEventListener('click', () => {
         audio.play();
         trackProps.muted = true;
         playBtn.classList.add("pause")
+        playItem[3].classList.remove('item-active')
+        playItem[3].classList.remove('item-noactive')
+        playItem[trackProps.position].classList.add('item-active')
+        playItem[trackProps.position].after(track)
     }
-})
+}
+
+nextPlayBtn.addEventListener('click', nextBtn)
 
 
 //Prev Button
-prevPlayBtn.addEventListener('click', () => {
+function prevBtn() {
     if (trackProps.position === 0) {
         trackProps.position = 3;
         audio.src = playList[trackProps.position].src;
         audio.play();
         trackProps.onAir = true;
         playBtn.classList.add("pause")
+        playItem[0].classList.remove('item-active')
+        playItem[0].classList.remove('item-noactive')
+        playItem[trackProps.position].classList.add('item-active')
+        playItem[trackProps.position].after(track)
     } else {
         trackProps.position = trackProps.position - 1;
         audio.src = playList[trackProps.position].src;
         audio.play();
         trackProps.onAir = true;
         playBtn.classList.add("pause")
+        playItem[trackProps.position + 1].classList.remove('item-active')
+        playItem[trackProps.position + 1].classList.remove('item-noactive')
+        playItem[trackProps.position].classList.add('item-active')
+        playItem[trackProps.position].after(track)
     }
-})
+}
+
+prevPlayBtn.addEventListener('click', prevBtn)
 
 
 //Mute Button
-muteBtn.addEventListener("click",() =>{
+function mute() {
     if (trackProps.muted === false) {
         trackProps.muted = true
         muteBtn.classList.remove("play-minvolume");
@@ -167,7 +194,9 @@ muteBtn.addEventListener("click",() =>{
             audio.volume = trackProps.prevVolume;
         }
     }
-})
+}
+
+muteBtn.addEventListener("click", mute)
 
 
 //Volume Control
@@ -206,13 +235,15 @@ audio.volume = trackProps.volume;
 
 
 //Progress Bar
-timer = setInterval(progressBar.oninput = function () {
-    progressBar.max = audio.duration;
+timer = setInterval(track.oninput = function () {
+    track.max = audio.duration;
     trackProps.currentTime = audio.currentTime;
-    progressBar.value = trackProps.currentTime;
+    track.value = trackProps.currentTime;
+    if (Math.floor(audio.duration) <= audio.currentTime) {
+        nextBtn()
+    }
 }, 1000)
 
-progressBar.oninput = function () {
-    audio.currentTime = progressBar.value;
+track.oninput = function () {
+    audio.currentTime = track.value;
 }
-
