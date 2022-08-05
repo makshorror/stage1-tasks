@@ -36,6 +36,8 @@ let trackProps = {
     muted: false,
     currentTime: 0
 };
+
+
 audio.src = playList[trackProps.position].src;
 let track = document.createElement("input")
 track.type = "range";
@@ -46,54 +48,43 @@ track.className = "timeTrack";
 
 
 //Audio click
-playItem[0].addEventListener('click', () => {
-    trackProps.position = 0;
-    audio.src = playList[trackProps.position].src
-    audio.play()
-    playItem[1].classList.remove('item-active')
-    playItem[2].classList.remove('item-active')
-    playItem[3].classList.remove('item-active')
-    playItem[1].classList.remove('item-noactive')
-    playItem[2].classList.remove('item-noactive')
-    playItem[3].classList.remove('item-noactive')
-    playPause()
-})
-playItem[1].addEventListener('click', () => {
-    trackProps.position = 1;
-    audio.src = playList[trackProps.position].src
-    audio.play()
-    playItem[0].classList.remove('item-active')
-    playItem[2].classList.remove('item-active')
-    playItem[3].classList.remove('item-active')
-    playItem[0].classList.remove('item-noactive')
-    playItem[2].classList.remove('item-noactive')
-    playItem[3].classList.remove('item-noactive')
-    playPause()
-})
-playItem[2].addEventListener('click', () => {
-    trackProps.position = 2;
-    audio.src = playList[trackProps.position].src
-    audio.play()
-    playItem[0].classList.remove('item-active')
-    playItem[1].classList.remove('item-active')
-    playItem[3].classList.remove('item-active')
-    playItem[0].classList.remove('item-noactive')
-    playItem[1].classList.remove('item-noactive')
-    playItem[3].classList.remove('item-noactive')
-    playPause()
-})
-playItem[3].addEventListener('click', () => {
-    trackProps.position = 3;
-    audio.src = playList[trackProps.position].src
-    audio.play()
-    playItem[0].classList.remove('item-active')
-    playItem[1].classList.remove('item-active')
-    playItem[2].classList.remove('item-active')
-    playItem[0].classList.remove('item-noactive')
-    playItem[1].classList.remove('item-noactive')
-    playItem[2].classList.remove('item-noactive')
-    playPause()
-})
+// playItem[0].addEventListener('click', () => {
+//     trackProps.position = 0
+//     playItem[1].classList.remove('item-active')
+//     playItem[2].classList.remove('item-active')
+//     playItem[3].classList.remove('item-active')
+//     playItem[1].classList.remove('item-noactive')
+//     playItem[2].classList.remove('item-noactive')
+//     playItem[3].classList.remove('item-noactive')
+//
+// })
+// playItem[1].addEventListener('click', () => {
+//     trackProps.position = 1
+//     playItem[0].classList.remove('item-active')
+//     playItem[2].classList.remove('item-active')
+//     playItem[3].classList.remove('item-active')
+//     playItem[0].classList.remove('item-noactive')
+//     playItem[2].classList.remove('item-noactive')
+//     playItem[3].classList.remove('item-noactive')
+// })
+// playItem[2].addEventListener('click', () => {
+//     trackProps.position = 2
+//     playItem[0].classList.remove('item-active')
+//     playItem[1].classList.remove('item-active')
+//     playItem[3].classList.remove('item-active')
+//     playItem[0].classList.remove('item-noactive')
+//     playItem[1].classList.remove('item-noactive')
+//     playItem[3].classList.remove('item-noactive')
+// })
+// playItem[3].addEventListener('click', () => {
+//     trackProps.position = 3
+//     playItem[0].classList.remove('item-active')
+//     playItem[1].classList.remove('item-active')
+//     playItem[2].classList.remove('item-active')
+//     playItem[0].classList.remove('item-noactive')
+//     playItem[1].classList.remove('item-noactive')
+//     playItem[2].classList.remove('item-noactive')
+// })
 
 //Play and Pause
 function playPause() {
