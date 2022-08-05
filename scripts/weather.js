@@ -5,6 +5,8 @@ let windBlock = document.querySelector('#wind');
 let humidityBlock = document.querySelector('#humidity');
 let city = localStorage.getItem("city");
 let iconBlock = document.getElementById('icons');
+let errorWeather = document.querySelector('.weather-error');
+if (city === null) city = "Minsk"
 if (localStorage.getItem("city") === null) {
     localStorage.setItem("city", "Minsk")
     searchInp.value = "Minsk"
@@ -37,6 +39,12 @@ function init() {
             return resp.json()
         })
         .then(data => {
+            iconBlock.style.display = "block"
+            tempBlock.style.display = "block"
+            windBlock.style.display = "block"
+            descriptionBlock.style.display = "block"
+            humidityBlock.style.display = "block"
+            errorWeather.style.display = "none"
             let idIcon = data['weather']['0']['id'];
             if (iconBlock.classList.length <= 2) {
                 iconBlock.classList.add(`owf-${idIcon}`);
@@ -51,20 +59,21 @@ function init() {
             humidityBlock.textContent = `Humidity: ${data['main']['humidity']}%`
             function windSpeed(){
                 let speed = data['wind']['speed'];
-                let wS = Math.floor(speed);
-                return wS;
+                return Math.floor(speed);
             }
             function temperature() {
-                let getTemp = data.main.temp
-                let tempC = Math.floor(getTemp) - 273
-                return tempC
+                let getTemp = data['main']['temp'];
+                return Math.floor(getTemp) - 273;
             }
         })
         .catch(() => {
-            alert('This city not found')
-            city = 'Minsk';
-            searchInp.value = 'Minsk';
-            init()
+            iconBlock.style.display = "none"
+            tempBlock.style.display = "none"
+            windBlock.style.display = "none"
+            descriptionBlock.style.display = "none"
+            humidityBlock.style.display = "none"
+            errorWeather.style.display = "block"
+            errorWeather.textContent = `Error! city not found for '${searchInp.value}'!`
         })
 }
 
