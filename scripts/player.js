@@ -38,6 +38,9 @@ let trackProps = {
 };
 
 
+
+
+
 audio.src = playList[trackProps.position].src;
 let track = document.createElement("input")
 track.type = "range";
@@ -48,43 +51,7 @@ track.className = "timeTrack";
 
 
 //Audio click
-// playItem[0].addEventListener('click', () => {
-//     trackProps.position = 0
-//     playItem[1].classList.remove('item-active')
-//     playItem[2].classList.remove('item-active')
-//     playItem[3].classList.remove('item-active')
-//     playItem[1].classList.remove('item-noactive')
-//     playItem[2].classList.remove('item-noactive')
-//     playItem[3].classList.remove('item-noactive')
-//
-// })
-// playItem[1].addEventListener('click', () => {
-//     trackProps.position = 1
-//     playItem[0].classList.remove('item-active')
-//     playItem[2].classList.remove('item-active')
-//     playItem[3].classList.remove('item-active')
-//     playItem[0].classList.remove('item-noactive')
-//     playItem[2].classList.remove('item-noactive')
-//     playItem[3].classList.remove('item-noactive')
-// })
-// playItem[2].addEventListener('click', () => {
-//     trackProps.position = 2
-//     playItem[0].classList.remove('item-active')
-//     playItem[1].classList.remove('item-active')
-//     playItem[3].classList.remove('item-active')
-//     playItem[0].classList.remove('item-noactive')
-//     playItem[1].classList.remove('item-noactive')
-//     playItem[3].classList.remove('item-noactive')
-// })
-// playItem[3].addEventListener('click', () => {
-//     trackProps.position = 3
-//     playItem[0].classList.remove('item-active')
-//     playItem[1].classList.remove('item-active')
-//     playItem[2].classList.remove('item-active')
-//     playItem[0].classList.remove('item-noactive')
-//     playItem[1].classList.remove('item-noactive')
-//     playItem[2].classList.remove('item-noactive')
-// })
+
 
 //Play and Pause
 function playPause() {
@@ -252,6 +219,9 @@ timer = setInterval(track.oninput = function () {
     track.max = audio.duration;
     trackProps.currentTime = audio.currentTime;
     track.value = trackProps.currentTime;
+    let current = Math.floor(audio.currentTime);
+    if (current < 10) current = "0" + current;
+    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${current}/${Math.floor(audio.duration)}`
     if (Math.floor(audio.duration) <= audio.currentTime) {
         nextBtn()
     }
@@ -259,4 +229,7 @@ timer = setInterval(track.oninput = function () {
 
 track.oninput = function () {
     audio.currentTime = track.value;
+    let current = Math.floor(audio.currentTime);
+    if (current < 10) current = "0" + current;
+    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${current}/${Math.floor(audio.duration)}`
 }
