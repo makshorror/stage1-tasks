@@ -49,7 +49,7 @@ track.className = "timeTrack";
 playItem[0].addEventListener('click', () => {
     trackProps.position = 0;
     audio.src = playList[trackProps.position].src
-    trackProps.onAir = false;
+    audio.play()
     playItem[1].classList.remove('item-active')
     playItem[2].classList.remove('item-active')
     playItem[3].classList.remove('item-active')
@@ -61,7 +61,7 @@ playItem[0].addEventListener('click', () => {
 playItem[1].addEventListener('click', () => {
     trackProps.position = 1;
     audio.src = playList[trackProps.position].src
-    trackProps.onAir = false;
+    audio.play()
     playItem[0].classList.remove('item-active')
     playItem[2].classList.remove('item-active')
     playItem[3].classList.remove('item-active')
@@ -73,7 +73,7 @@ playItem[1].addEventListener('click', () => {
 playItem[2].addEventListener('click', () => {
     trackProps.position = 2;
     audio.src = playList[trackProps.position].src
-    trackProps.onAir = false;
+    audio.play()
     playItem[0].classList.remove('item-active')
     playItem[1].classList.remove('item-active')
     playItem[3].classList.remove('item-active')
@@ -85,7 +85,7 @@ playItem[2].addEventListener('click', () => {
 playItem[3].addEventListener('click', () => {
     trackProps.position = 3;
     audio.src = playList[trackProps.position].src
-    trackProps.onAir = false;
+    audio.play()
     playItem[0].classList.remove('item-active')
     playItem[1].classList.remove('item-active')
     playItem[2].classList.remove('item-active')
@@ -97,8 +97,6 @@ playItem[3].addEventListener('click', () => {
 
 //Play and Pause
 function playPause() {
-    console.log(Math.floor(audio.duration))
-    console.log(audio.currentTime)
     if (trackProps.onAir === false) {
         audio.play();
         trackProps.onAir = true;

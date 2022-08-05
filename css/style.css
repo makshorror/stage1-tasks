@@ -156,7 +156,10 @@ body {
 
 .timeTrack {
   width: 155px;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
 }
+
 
 .weather {
   display: flex;
