@@ -214,14 +214,26 @@ audio.volume = trackProps.volume;
 }
 
 
+
+
 //Progress Bar
 timer = setInterval(track.oninput = function () {
     track.max = audio.duration;
     trackProps.currentTime = audio.currentTime;
     track.value = trackProps.currentTime;
+
     let current = Math.floor(audio.currentTime);
-    if (current < 10) current = "0" + current;
-    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${current}/${Math.floor(audio.duration)}`
+    let dur = Math.floor(audio.duration);
+    let minuteCurrent = Math.floor(current / 60);
+    let secondCurrent = Math.floor(current % 60);
+    let minuteDur = Math.floor(dur / 60);
+    let secondDur = Math.floor(dur % 60);
+
+    if (secondCurrent < 10) secondCurrent = "0" + secondCurrent;
+    if (secondDur < 10) secondDur = "0" + secondDur;
+    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${minuteCurrent}:${secondCurrent}/${minuteDur}:${secondDur}`
+
+
     if (Math.floor(audio.duration) <= audio.currentTime) {
         nextBtn()
     }
@@ -229,7 +241,15 @@ timer = setInterval(track.oninput = function () {
 
 track.oninput = function () {
     audio.currentTime = track.value;
+
     let current = Math.floor(audio.currentTime);
-    if (current < 10) current = "0" + current;
-    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${current}/${Math.floor(audio.duration)}`
+    let dur = Math.floor(audio.duration);
+    let minuteCurrent = Math.floor(current / 60);
+    let secondCurrent = Math.floor(current % 60);
+    let minuteDur = Math.floor(dur / 60);
+    let secondDur = Math.floor(dur % 60);
+
+    if (secondCurrent < 10) secondCurrent = "0" + secondCurrent;
+    if (secondDur < 10) secondDur = "0" + secondDur;
+    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${minuteCurrent}:${secondCurrent}/${minuteDur}:${secondDur}`
 }
