@@ -4,8 +4,9 @@ const prevPlayBtn = document.querySelector("#prevPlay");
 const muteBtn = document.querySelector('#mute');
 const volumeRange = document.querySelector('#volumeRange');
 const playItem = document.querySelectorAll(".play-item");
-const timeTrackCurrent = document.querySelector(".player")
+
 let audio = new Audio();
+
 const playList =  [
     {
         title: 'Aqua Caelestis',
@@ -28,6 +29,7 @@ const playList =  [
         duration: '01:50'
     },
 ];
+
 let trackProps = {
     onAir: false,
     position: 0,
@@ -37,9 +39,6 @@ let trackProps = {
     muted: false,
     currentTime: 0
 };
-
-
-
 
 
 audio.src = playList[trackProps.position].src;
@@ -52,7 +51,31 @@ track.className = "timeTrack";
 
 
 //Audio click
+document.getElementById("track1").addEventListener('click', () => {
+    trackProps.position = 0;
+    playItem[1].textContent = `${playList[1].title}`
+    playItem[2].textContent = `${playList[2].title}`
+    playItem[3].textContent = `${playList[3].title}`
+    playItem[1].classList.remove('item-active')
+    playItem[2].classList.remove('item-active')
+    playItem[3].classList.remove('item-active')
+    playItem[1].classList.remove('item-noactive')
+    playItem[2].classList.remove('item-noactive')
+    playItem[3].classList.remove('item-noactive')
+})
 
+document.getElementById("track2").addEventListener('click', () => {
+    trackProps.position = 1;
+    playItem[0].textContent = `${playList[0].title}`
+    playItem[2].textContent = `${playList[2].title}`
+    playItem[3].textContent = `${playList[3].title}`
+    playItem[0].classList.remove('item-active')
+    playItem[2].classList.remove('item-active')
+    playItem[3].classList.remove('item-active')
+    playItem[0].classList.remove('item-noactive')
+    playItem[2].classList.remove('item-noactive')
+    playItem[3].classList.remove('item-noactive')
+})
 
 //Play and Pause
 function playPause() {
@@ -232,7 +255,7 @@ timer = setInterval(track.oninput = function () {
     if (Math.floor(audio.duration) <= audio.currentTime) {
         nextBtn()
     }
-}, 1000)
+}, 0)
 
 track.oninput = function () {
     audio.currentTime = track.value;
@@ -240,7 +263,7 @@ track.oninput = function () {
 }
 
 
-// Time
+// Current Time and Duration
 function curTime() {
     let current = Math.floor(audio.currentTime);
     let dur = Math.floor(audio.duration);
