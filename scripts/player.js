@@ -4,6 +4,7 @@ const prevPlayBtn = document.querySelector("#prevPlay");
 const muteBtn = document.querySelector('#mute');
 const volumeRange = document.querySelector('#volumeRange');
 const playItem = document.querySelectorAll(".play-item");
+const timeTrackCurrent = document.querySelector(".player")
 let audio = new Audio();
 const playList =  [
     {
@@ -87,6 +88,8 @@ function nextBtn() {
         playItem[trackProps.position - 1].classList.remove('item-noactive')
         playItem[trackProps.position].classList.add('item-active')
         playItem[trackProps.position].after(track)
+        playItem[trackProps.position - 1].textContent = `${playList[trackProps.position - 1].title}`
+
 
     } else {
         trackProps.position = 0;
@@ -99,7 +102,9 @@ function nextBtn() {
         playItem[3].classList.remove('item-noactive')
         playItem[trackProps.position].classList.add('item-active')
         playItem[trackProps.position].after(track)
+        playItem[3].textContent = `${playList[3].title}`
     }
+
 }
 
 nextPlayBtn.addEventListener('click', nextBtn)
@@ -117,6 +122,7 @@ function prevBtn() {
         playItem[0].classList.remove('item-noactive')
         playItem[trackProps.position].classList.add('item-active')
         playItem[trackProps.position].after(track)
+        playItem[0].textContent = `${playList[0].title}`
     } else {
         trackProps.position = trackProps.position - 1;
         audio.src = playList[trackProps.position].src;
@@ -127,6 +133,7 @@ function prevBtn() {
         playItem[trackProps.position + 1].classList.remove('item-noactive')
         playItem[trackProps.position].classList.add('item-active')
         playItem[trackProps.position].after(track)
+        playItem[trackProps.position + 1].textContent = `${playList[trackProps.position + 1].title}`
     }
 }
 
@@ -221,19 +228,7 @@ timer = setInterval(track.oninput = function () {
     track.max = audio.duration;
     trackProps.currentTime = audio.currentTime;
     track.value = trackProps.currentTime;
-
-    let current = Math.floor(audio.currentTime);
-    let dur = Math.floor(audio.duration);
-    let minuteCurrent = Math.floor(current / 60);
-    let secondCurrent = Math.floor(current % 60);
-    let minuteDur = Math.floor(dur / 60);
-    let secondDur = Math.floor(dur % 60);
-
-    if (secondCurrent < 10) secondCurrent = "0" + secondCurrent;
-    if (secondDur < 10) secondDur = "0" + secondDur;
-    playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${minuteCurrent}:${secondCurrent}/${minuteDur}:${secondDur}`
-
-
+    curTime()
     if (Math.floor(audio.duration) <= audio.currentTime) {
         nextBtn()
     }
@@ -241,7 +236,12 @@ timer = setInterval(track.oninput = function () {
 
 track.oninput = function () {
     audio.currentTime = track.value;
+    curTime()
+}
 
+
+// Time
+function curTime() {
     let current = Math.floor(audio.currentTime);
     let dur = Math.floor(audio.duration);
     let minuteCurrent = Math.floor(current / 60);
