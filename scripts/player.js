@@ -244,8 +244,6 @@ audio.volume = trackProps.volume;
 }
 
 
-
-
 //Progress Bar
 timer = setInterval(track.oninput = function () {
     track.max = audio.duration;
