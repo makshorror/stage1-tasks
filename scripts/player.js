@@ -4,7 +4,6 @@ const prevPlayBtn = document.querySelector("#prevPlay");
 const muteBtn = document.querySelector('#mute');
 const volumeRange = document.querySelector('#volumeRange');
 const playItem = document.querySelectorAll(".play-item");
-
 let audio = new Audio();
 
 const playList =  [
@@ -41,7 +40,10 @@ let trackProps = {
 };
 
 
+
+
 audio.src = playList[trackProps.position].src;
+trackProps.src = audio.src;
 let track = document.createElement("input")
 track.type = "range";
 track.min = "0"
@@ -51,37 +53,14 @@ track.className = "timeTrack";
 
 
 //Audio click
-document.getElementById("track1").addEventListener('click', () => {
-    trackProps.position = 0;
-    playItem[1].textContent = `${playList[1].title}`
-    playItem[2].textContent = `${playList[2].title}`
-    playItem[3].textContent = `${playList[3].title}`
-    playItem[1].classList.remove('item-active')
-    playItem[2].classList.remove('item-active')
-    playItem[3].classList.remove('item-active')
-    playItem[1].classList.remove('item-noactive')
-    playItem[2].classList.remove('item-noactive')
-    playItem[3].classList.remove('item-noactive')
-})
 
-document.getElementById("track2").addEventListener('click', () => {
-    trackProps.position = 1;
-    playItem[0].textContent = `${playList[0].title}`
-    playItem[2].textContent = `${playList[2].title}`
-    playItem[3].textContent = `${playList[3].title}`
-    playItem[0].classList.remove('item-active')
-    playItem[2].classList.remove('item-active')
-    playItem[3].classList.remove('item-active')
-    playItem[0].classList.remove('item-noactive')
-    playItem[2].classList.remove('item-noactive')
-    playItem[3].classList.remove('item-noactive')
-})
 
 //Play and Pause
 function playPause() {
     if (trackProps.onAir === false) {
         audio.play();
         trackProps.onAir = true;
+        trackProps.src = audio.src;
         playBtn.classList.add("pause")
         playItem[trackProps.position].classList.remove('item-noactive')
         playItem[trackProps.position].classList.add('item-active')
@@ -89,6 +68,7 @@ function playPause() {
     } else {
         audio.pause();
         trackProps.onAir = false;
+        trackProps.src = audio.src
         playBtn.classList.remove("pause")
         playItem[trackProps.position].classList.remove('item-active')
         playItem[trackProps.position].classList.add('item-noactive')
@@ -105,6 +85,7 @@ function nextBtn() {
         trackProps.onAir = true;
         trackProps.position = trackProps.position + 1;
         audio.src = playList[trackProps.position].src;
+        trackProps.src = audio.src
         audio.play();
         playBtn.classList.add("pause")
         playItem[trackProps.position - 1].classList.remove('item-active')
@@ -118,6 +99,7 @@ function nextBtn() {
         trackProps.position = 0;
         trackProps.onAir = true;
         audio.src = playList[trackProps.position].src;
+        trackProps.src = audio.src
         audio.play();
         trackProps.muted = true;
         playBtn.classList.add("pause")
@@ -138,6 +120,7 @@ function prevBtn() {
     if (trackProps.position === 0) {
         trackProps.position = 3;
         audio.src = playList[trackProps.position].src;
+        trackProps.src = audio.src
         audio.play();
         trackProps.onAir = true;
         playBtn.classList.add("pause")
@@ -149,6 +132,7 @@ function prevBtn() {
     } else {
         trackProps.position = trackProps.position - 1;
         audio.src = playList[trackProps.position].src;
+        trackProps.src = audio.src
         audio.play();
         trackProps.onAir = true;
         playBtn.classList.add("pause")
@@ -274,3 +258,4 @@ function curTime() {
     if (secondDur < 10) secondDur = "0" + secondDur;
     playItem[trackProps.position].textContent = `${playList[trackProps.position].title} ${minuteCurrent}:${secondCurrent}/${minuteDur}:${secondDur}`
 }
+
