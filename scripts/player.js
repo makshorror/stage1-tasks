@@ -54,6 +54,66 @@ track.className = "timeTrack";
 
 //Audio click
 
+playItem.forEach(function (track) {
+    track.addEventListener('click', function (e) {
+        let id = this.id.replace(/track/ig, '') - 1;
+        if (id === 0) {
+            playItem[1].textContent = `${playList[1].title}`
+            playItem[2].textContent = `${playList[2].title}`
+            playItem[3].textContent = `${playList[3].title}`
+            playItem[1].classList.remove('item-active')
+            playItem[2].classList.remove('item-active')
+            playItem[3].classList.remove('item-active')
+            playItem[1].classList.remove('item-noactive')
+            playItem[2].classList.remove('item-noactive')
+            playItem[3].classList.remove('item-noactive')
+        } else if (id === 1) {
+            playItem[0].textContent = `${playList[0].title}`
+            playItem[2].textContent = `${playList[2].title}`
+            playItem[3].textContent = `${playList[3].title}`
+            playItem[0].classList.remove('item-active')
+            playItem[2].classList.remove('item-active')
+            playItem[3].classList.remove('item-active')
+            playItem[0].classList.remove('item-noactive')
+            playItem[2].classList.remove('item-noactive')
+            playItem[3].classList.remove('item-noactive')
+        } else if (id === 2) {
+            playItem[0].textContent = `${playList[0].title}`
+            playItem[1].textContent = `${playList[1].title}`
+            playItem[3].textContent = `${playList[3].title}`
+            playItem[0].classList.remove('item-active')
+            playItem[1].classList.remove('item-active')
+            playItem[3].classList.remove('item-active')
+            playItem[0].classList.remove('item-noactive')
+            playItem[1].classList.remove('item-noactive')
+            playItem[3].classList.remove('item-noactive')
+        } else {
+            playItem[0].textContent = `${playList[0].title}`
+            playItem[1].textContent = `${playList[1].title}`
+            playItem[2].textContent = `${playList[2].title}`
+            playItem[0].classList.remove('item-active')
+            playItem[1].classList.remove('item-active')
+            playItem[2].classList.remove('item-active')
+            playItem[0].classList.remove('item-noactive')
+            playItem[1].classList.remove('item-noactive')
+            playItem[2].classList.remove('item-noactive')
+        }
+        if (trackProps.position !== id) {
+            audio.src = playList[id].src;
+            trackProps.position = id;
+            plays()
+        } else {
+            playPause()
+        }
+    })
+})
+
+
+
+
+
+
+
 
 //Play and Pause
 function playPause() {
@@ -73,6 +133,23 @@ function playPause() {
         playItem[trackProps.position].classList.remove('item-active')
         playItem[trackProps.position].classList.add('item-noactive')
     }
+}
+
+function plays() {
+    audio.play();
+    trackProps.onAir = true;
+    playBtn.classList.add("pause")
+    playItem[trackProps.position].classList.remove('item-noactive')
+    playItem[trackProps.position].classList.add('item-active')
+    playItem[trackProps.position].after(track)
+}
+
+function paused(){
+    audio.pause();
+    trackProps.onAir = false;
+    playBtn.classList.remove("pause")
+    playItem[trackProps.position].classList.remove('item-active')
+    playItem[trackProps.position].classList.add('item-noactive')
 }
 
 playBtn.addEventListener("click", playPause)
