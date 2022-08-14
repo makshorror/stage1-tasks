@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <button id="prevPlay" class="play-prev player-icon"></button>
+        <button id="playPlay" class="play player-icon"></button>
+        <button id="nextPlay" class="play-next player-icon"></button>
+          <button id="mute" class="play-maxvolume player-icon"></button>
+          <input  id="volumeRange" class="volumeRange" type="range" min="0" max="100" value="100">
+      </div>
+      <ul class="play-list">
+        <li id="track1" class="play-item">Aqua Caelestis</li>
+        <li id="track2" class="play-item">River Flows In You</li>
+        <li id="track3" class="play-item">Ennio Morricone</li>
+        <li id="track4" class="play-item">Summer Wind</li>
+      </ul>
+    </div>
+    <div class="weather" id="weather">
+      <input type="text" id="city" class="city"/>
+      <i class="weather-icon owf"  id="icons"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature" id="temp"></span>
+        <span id="weather-description" class="weather-description"></span>
+      </div>
+      <div id="wind" class="wind"></div>
+      <div id="humidity" class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time" id="time"></time>
+    <date class="date" id="date"></date>
+    <div class="greeting-container">
+      <span class="greeting" id="greeting"></span>
+      <input type="text" placeholder="[Enter name]" class="name" />
+    </div>
+  </main>
+  <footer class="footer">
+    <button class="change-quote" id="change-quote"></button>
+    <div>
+      <div class="quote" id="quote"></div>
+      <div class="author" id="author"></div>
+    </div>
+  </footer>
+  <script src="scripts/localstorage.js"></script>
+  <script src="scripts/timeDate.js"></script>
+  <script src="scripts/weather.js"></script>
+  <script src="scripts/player.js"></script>
+  <script src="scripts/quotes.js"></script>
+  <script src="scripts/background.js"></script>
+
+</body>
+</html>
